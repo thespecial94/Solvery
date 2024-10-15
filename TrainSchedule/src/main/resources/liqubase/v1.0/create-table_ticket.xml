@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="14" author="MSultanakhmedov">
+        <preConditions onError="MARK_RAN" onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ticket"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ticket">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="passenger_id" type="INT">
+                <constraints nullable="true" foreignKeyName="fk_passenger_id" references="passenger(id)" deleteCascade="false"/>
+            </column>
+            <column name="train_id" type="INT">
+                <constraints nullable="true" foreignKeyName="fk_train_id" references="train(id)" deleteCascade="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
